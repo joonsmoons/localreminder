@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  <h1>Entity List</h1>
+  {% if entity_list %}
+    <ul>
+      {% for entity in entity_list %}
+        <li>
+          <a href="{{ entity.get_absolute_url }}">{{ entity.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no entities in reminders.</p>
+  {% endif %}
+{% endblock %}

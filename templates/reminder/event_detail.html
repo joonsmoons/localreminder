@@ -1,0 +1,41 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  <h1>Event:
+    {{ event.name }}</h1>
+  <p>
+    <strong>Entities:
+    </strong>
+    {% for entity in event.entities.all %}
+      <span>
+        <a href="{{ entity.get_absolute_url }}">{{ entity.name }}</a>
+      </span>
+      {%endfor%}
+    </p>
+    <p>
+      <strong>Date:</strong>
+      {{ event.date }}</p>
+    <p>
+      <strong>Category:</strong>
+      {{ event.category }}</p>
+    <p>
+      <strong>Recurrence:</strong>
+      {{ event.recurrence }}</p>
+
+    <div style="margin-left: 20px; margin-top: 20px">
+      <h4>Instances</h4>
+
+      {% for copy in event.eventinstance_set.all %}
+        <hr/>
+        <p>
+          <strong>Date:</strong>
+          {{ copy.date }}</p>
+        <p class="{% if copy.is_complete %}text-success{% else %}text-danger{% endif %}">
+          {{ copy.is_complete_display }}
+        </p>
+
+        <p class="text-muted">
+          <strong>Id:</strong>
+          {{ copy.id }}</p>
+      {% endfor %}
+    </div>
+  {% endblock %}
